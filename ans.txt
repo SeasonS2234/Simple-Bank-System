@@ -1,0 +1,1 @@
+select distinct C.Customer_Id,C.Customer_name from Customer C where not exists(select Branch_Id from Branch B where Branch_Address="Bangalore" and not exists(select Branch_Id from Accounts A where A.Customer_Id=C.Customer_Id and A.Branch_Id=B.Branch_Id));

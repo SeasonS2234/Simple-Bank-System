@@ -1,0 +1,240 @@
+Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 18
+Server version: 8.0.22 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database BankSystem;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> use BankSystem;
+Database changed
+mysql> create table Bank(B_Address varchar(100) , B_name varchar(100) , Bank_Id int , primary key (Bank_Id));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create table Branch(Branch_name varchar(100) , Branch_Address varchar(100) , Branch_Id int , primary key (Branch_Id));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table Accounts(Account_no int , Account_type varchar(100) , Balance int , primary key (Account_no));
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> create table Customer(Customer_Id int , Customer_name varchar(100) , Phone_no varchar(10) , Customer_Address varchar(100));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table Loan(Loan_Id int , Loan_type varchar(100) , Loan_Amount int , primary key (Loan_Id));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> show tables;
++----------------------+
+| Tables_in_banksystem |
++----------------------+
+| accounts             |
+| bank                 |
+| branch               |
+| customer             |
+| loan                 |
++----------------------+
+5 rows in set (0.05 sec)
+
+mysql> desc Bank;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| B_Address | varchar(100) | YES  |     | NULL    |       |
+| B_name    | varchar(100) | YES  |     | NULL    |       |
+| Bank_Id   | int          | NO   | PRI | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> desc Branch;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| Branch_name    | varchar(100) | YES  |     | NULL    |       |
+| Branch_Address | varchar(100) | YES  |     | NULL    |       |
+| Branch_Id      | int          | NO   | PRI | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc Customer;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| Customer_Id      | int          | YES  |     | NULL    |       |
+| Customer_name    | varchar(100) | YES  |     | NULL    |       |
+| Phone_no         | varchar(10)  | YES  |     | NULL    |       |
+| Customer_Address | varchar(100) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table Customer add primary key (Customer_Id);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Customer;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| Customer_Id      | int          | NO   | PRI | NULL    |       |
+| Customer_name    | varchar(100) | YES  |     | NULL    |       |
+| Phone_no         | varchar(10)  | YES  |     | NULL    |       |
+| Customer_Address | varchar(100) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> desc Accounts;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| Account_no   | int          | NO   | PRI | NULL    |       |
+| Account_type | varchar(100) | YES  |     | NULL    |       |
+| Balance      | int          | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> desc Loan;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| Loan_Id     | int          | NO   | PRI | NULL    |       |
+| Loan_type   | varchar(100) | YES  |     | NULL    |       |
+| Loan_Amount | int          | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into Bank values("Bangalore" , "Axis" , "1001");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into Bank values("Mumbai" , "PNB" , "1002");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into Bank values("Kolkatta" , "WBM" , "1003");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Bank;
++-----------+--------+---------+
+| B_Address | B_name | Bank_Id |
++-----------+--------+---------+
+| Bangalore | Axis   |    1001 |
+| Mumbai    | PNB    |    1002 |
+| Kolkatta  | WBM    |    1003 |
++-----------+--------+---------+
+3 rows in set (0.01 sec)
+
+mysql> insert into Branch values("West Zone" , "Bangalore" , "101");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into Branch values("South Zone" , "Mumbai" , "102");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Branch values("East Zone" , "Kolkatta" , "103");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> update Branch set Branch_name="West Zone" where Branch_Id="102";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update Branch set Branch_name="South Zone" where Branch_Id="101";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Brnach;
+ERROR 1146 (42S02): Table 'banksystem.brnach' doesn't exist
+mysql> select * from Branch;
++-------------+----------------+-----------+
+| Branch_name | Branch_Address | Branch_Id |
++-------------+----------------+-----------+
+| South Zone  | Bangalore      |       101 |
+| West Zone   | Mumbai         |       102 |
+| East Zone   | Kolkatta       |       103 |
++-------------+----------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> insert into Customer values ("9001" , "Mike" , "1234567890" , "Bangalore");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Customer values ("9002" , "Alex" , "1234567891" , "Bangalore");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Customer values ("8001" , "Tim" , "1234567892" , "Mumbai");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into Customer values ("8002" , "Kim" , "1234567893" , "Mumbai");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into Customer values ("7001" , "Pam" , "1234567894" , "Kolkatta");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Customer values ("7002" , "Joe" , "1234567895" , "Kolkatta");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Customer;
++-------------+---------------+------------+------------------+
+| Customer_Id | Customer_name | Phone_no   | Customer_Address |
++-------------+---------------+------------+------------------+
+|        7001 | Pam           | 1234567894 | Kolkatta         |
+|        7002 | Joe           | 1234567895 | Kolkatta         |
+|        8001 | Tim           | 1234567892 | Mumbai           |
+|        8002 | Kim           | 1234567893 | Mumbai           |
+|        9001 | Mike          | 1234567890 | Bangalore        |
+|        9002 | Alex          | 1234567891 | Bangalore        |
++-------------+---------------+------------+------------------+
+6 rows in set (0.00 sec)
+
+mysql> insert into Accounts values("11" , "Savings" , "50000");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Accounts values("12" , "Current" , "60000");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Accounts values("13" , "Fixed Deposit" , "80000");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Accounts values("14" , "Savings" , "90000");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from Accounts;
++------------+---------------+---------+
+| Account_no | Account_type  | Balance |
++------------+---------------+---------+
+|         11 | Savings       |   50000 |
+|         12 | Current       |   60000 |
+|         13 | Fixed Deposit |   80000 |
+|         14 | Savings       |   90000 |
++------------+---------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> insert into Loan values("91" , "Home Loan" , "150000");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Loan values("92" , "Education Loan" , "250000");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Loan values("93" , "Startup Loan" , "350000");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from Loan;
++---------+----------------+-------------+
+| Loan_Id | Loan_type      | Loan_Amount |
++---------+----------------+-------------+
+|      91 | Home Loan      |      150000 |
+|      92 | Education Loan |      250000 |
+|      93 | Startup Loan   |      350000 |
++---------+----------------+-------------+
+3 rows in set (0.00 sec)
+
+
+mysql> alter table Accounts  add Customer_Id int;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Accounts add Branch_Id int;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
